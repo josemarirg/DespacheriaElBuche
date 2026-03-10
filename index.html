@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Despachería El Buche</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =============================================
+       VARIABLES DE COLOR — extraídas del logotipo
+       ============================================= */
+    :root {
+      --crema:        #EDEAE2;   /* fondo — idéntico al fondo del logotipo */
+      --crema-oscura: #E2DDD4;
+      --marron-oscuro:#4A3728;   /* textos principales */
+      --marron-medio: #7A5840;   /* acentos, etiquetas */
+      --marron-claro: #A0826A;   /* borde suave botones */
+      --hover-bg:     rgba(122,88,64,.10); /* fondo hover integrado */
+      --sombra:       rgba(61,43,31,.08);
+    }
+
+    /* =============================================
+       RESET & BASE
+       ============================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      background-color: var(--crema);
+      color: var(--marron-oscuro);
+      /* Sin papel de grano sobre fondo tan neutro */
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* =============================================
+       TEXTURA DE GRANO (noise overlay)
+       ============================================= */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 999;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: .03;
+    }
+
+    /* =============================================
+       CABECERA / HERO
+       ============================================= */
+    header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1.5rem 2.5rem;
+      position: relative;
+      text-align: center;
+    }
+
+    /* línea decorativa superior */
+    header::before {
+      content: '';
+      display: block;
+      width: 120px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--marron-medio), transparent);
+      margin-bottom: 2.5rem;
+    }
+
+    .logo-wrap {
+      width: min(340px, 88vw);
+      animation: fadeDown .9s ease both;
+    }
+
+    .logo-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* dirección / subtítulo */
+    .subtitle {
+      margin-top: 1.4rem;
+      font-size: clamp(.95rem, 3vw, 1.1rem);
+      font-weight: 300;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--marron-medio);
+      animation: fadeUp .9s .25s ease both;
+    }
+
+    /* línea decorativa inferior cabecera */
+    header::after {
+      content: '—';
+      display: block;
+      color: var(--marron-claro);
+      font-size: .9rem;
+      letter-spacing: .6em;
+      margin-top: 2rem;
+      opacity: .5;
+      animation: fadeUp .9s .4s ease both;
+    }
+
+    /* =============================================
+       SECCIÓN PRINCIPAL DE BOTONES
+       ============================================= */
+    main {
+      padding: 0 1.25rem 4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.1rem;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* Grupo: cartas */
+    .btn-group-label {
+      align-self: flex-start;
+      font-size: .88rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--marron-medio);
+      opacity: .8;
+      margin-top: .6rem;
+      margin-bottom: -.3rem;
+      padding-left: .15rem;
+    }
+
+    /* =============================================
+       BOTONES
+       ============================================= */
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .75rem;
+      width: 100%;
+      min-height: 64px;
+      padding: 1.1rem 1.8rem;
+      border-radius: 3px;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.05rem, 4vw, 1.25rem);
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      position: relative;
+      overflow: hidden;
+      transition: transform .18s ease, box-shadow .18s ease, background-color .22s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* efecto ripple al tocar */
+    .btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,.12);
+      opacity: 0;
+      transition: opacity .3s;
+    }
+    .btn:active::after { opacity: 1; }
+    .btn:active { transform: scale(.975); }
+
+    /* — Todos los botones: integrados en la paleta, sin rellenos extraños */
+    .btn-primary,
+    .btn-secondary,
+    .btn-outline,
+    .btn-reserva {
+      background-color: transparent;
+      color: var(--marron-oscuro);
+      border: 1.5px solid var(--marron-claro);
+      box-shadow: none;
+    }
+
+    .btn-primary:hover,
+    .btn-secondary:hover,
+    .btn-outline:hover,
+    .btn-reserva:hover {
+      background-color: var(--hover-bg);
+      border-color: var(--marron-medio);
+      color: var(--marron-oscuro);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px var(--sombra);
+    }
+
+    /* Botón principal destacado (Carta y Reserva) */
+    .btn-primary,
+    .btn-reserva {
+      background-color: rgba(122,88,64,.08);
+      border-color: var(--marron-medio);
+    }
+
+    .btn-primary:hover,
+    .btn-reserva:hover {
+      background-color: rgba(122,88,64,.16);
+    }
+
+    /* gap reducido sin icono */
+    .btn { gap: 0; }
+
+    /* Animaciones de entrada escalonadas */
+    .btn:nth-child(1)  { animation: fadeUp .7s .35s ease both; }
+    .btn:nth-child(2)  { animation: fadeUp .7s .48s ease both; }
+    .btn:nth-child(3)  { animation: fadeUp .7s .61s ease both; }
+    .btn:nth-child(4)  { animation: fadeUp .7s .74s ease both; }
+    .btn-group-label:nth-of-type(1) { animation: fadeUp .7s .3s  ease both; }
+    .btn-group-label:nth-of-type(2) { animation: fadeUp .7s .56s ease both; }
+
+    /* Divisor entre grupos */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--marron-medio), transparent);
+      opacity: .3;
+      margin: .4rem 0;
+      animation: fadeUp .7s .6s ease both;
+    }
+
+    /* =============================================
+       FOOTER
+       ============================================= */
+    footer {
+      text-align: center;
+      padding: 2rem 1.5rem 3rem;
+      font-size: .82rem;
+      letter-spacing: .12em;
+      color: var(--marron-medio);
+      opacity: .7;
+      animation: fadeUp .9s .9s ease both;
+    }
+
+    footer p + p { margin-top: .4rem; }
+
+    footer a {
+      color: var(--marron-medio);
+      text-decoration: none;
+    }
+
+    /* =============================================
+       KEYFRAMES
+       ============================================= */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* =============================================
+       RESPONSIVE — pantallas grandes
+       ============================================= */
+    @media (min-width: 600px) {
+      header { padding: 4rem 2rem 3rem; }
+      main   { padding: 0 2rem 5rem; }
+      .btn   { min-height: 70px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ====================================================
+       CABECERA — logo centrado
+       ==================================================== -->
+  <header>
+    <div class="logo-wrap">
+      <!--
+        INSTRUCCIÓN: coloca el archivo del logo (ej. logo.png) en la misma
+        carpeta que este HTML y actualiza el atributo src si es necesario.
+      -->
+      <img
+        src="logoBuche.png"
+        alt="Logotipo Despachería El Buche"
+      />
+    </div>
+    <p class="subtitle">Calle Ánimas 5 &nbsp;·&nbsp; Los Remedios</p>
+  </header>
+
+  <!-- ====================================================
+       BOTONES PRINCIPALES
+       ==================================================== -->
+  <main>
+
+    <!-- —— Grupo 1: Cartas —— -->
+    <span class="btn-group-label">Nuestra carta</span>
+
+    <!--
+      BOTÓN 1 — Carta principal
+      INSTRUCCIÓN: sustituye "ruta/carta.pdf" por la ruta real de tu PDF.
+      Ejemplo: si el PDF está en la misma carpeta → href="carta.pdf"
+    -->
+    <a
+      class="btn btn-primary"
+      href="carta.pdf"
+      target="_blank"
+      rel="noopener"
+      aria-label="Ver la carta en PDF"
+    >
+      Carta
+    </a>
+
+    <!--
+      BOTÓN 2 — Carta Evento del Pescaito
+      INSTRUCCIÓN: sustituye "ruta/pescaito.pdf" por la ruta real de tu PDF.
+    -->
+    <a
+      class="btn btn-secondary"
+      href="pescaito.pdf"
+      target="_blank"
+      rel="noopener"
+      aria-label="Ver la carta del Evento del Pescaito en PDF"
+    >
+    Evento del Pescaito
+    </a>
+
+    <div class="divider"></div>
+
+    <!-- —— Grupo 2: Contacto —— -->
+    <span class="btn-group-label">Contacto</span>
+
+    <!--
+      BOTÓN 3 — Haz tu evento
+      INSTRUCCIÓN: sustituye "+34000000000" por el número de teléfono real
+      en formato internacional sin espacios. Ejemplo: +34612345678
+    -->
+    <a
+      class="btn btn-outline"
+      href="tel:+34000000000"
+      aria-label="Llamar para organizar un evento"
+    >
+      Haz tu evento con nosotros
+    </a>
+
+    <!--
+      BOTÓN 4 — Reserva tu mesa
+      INSTRUCCIÓN: sustituye "+34000000000" por el mismo número real.
+    -->
+    <a
+      class="btn btn-reserva"
+      href="tel:+34000000000"
+      aria-label="Llamar para reservar mesa"
+    >
+      Reserva tu mesa
+    </a>
+
+  </main>
+
+  <!-- ====================================================
+       FOOTER
+       ==================================================== -->
+  <footer>
+    <p>Despachería El Buche</p>
+    <p>Calle Ánimas 5 &nbsp;·&nbsp; Los Remedios</p>
+    <!--
+      INSTRUCCIÓN: si quieres añadir un enlace a Google Maps, sustituye
+      el # por la URL de tu ubicación en Google Maps.
+    -->
+    <p><a href="#" rel="noopener" target="_blank">Ver en Google Maps</a></p>
+  </footer>
+
+</body>
+</html>
