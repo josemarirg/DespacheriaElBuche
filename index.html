@@ -209,13 +209,14 @@
     /* gap reducido sin icono */
     .btn { gap: 0; }
 
-    /* Animaciones de entrada escalonadas */
-    .btn:nth-child(1)  { animation: fadeUp .7s .35s ease both; }
-    .btn:nth-child(2)  { animation: fadeUp .7s .48s ease both; }
-    .btn:nth-child(3)  { animation: fadeUp .7s .61s ease both; }
-    .btn:nth-child(4)  { animation: fadeUp .7s .74s ease both; }
-    .btn-group-label:nth-of-type(1) { animation: fadeUp .7s .3s  ease both; }
-    .btn-group-label:nth-of-type(2) { animation: fadeUp .7s .56s ease both; }
+    /* Animaciones de entrada escalonadas — por orden real en el DOM */
+    main > *:nth-child(1) { animation: fadeUp .7s .30s ease both; }
+    main > *:nth-child(2) { animation: fadeUp .7s .42s ease both; }
+    main > *:nth-child(3) { animation: fadeUp .7s .54s ease both; }
+    main > *:nth-child(4) { animation: fadeUp .7s .66s ease both; }
+    main > *:nth-child(5) { animation: fadeUp .7s .78s ease both; }
+    main > *:nth-child(6) { animation: fadeUp .7s .90s ease both; }
+    main > *:nth-child(7) { animation: fadeUp .7s 1.02s ease both; }
 
     /* Divisor entre grupos */
     .divider {
@@ -293,65 +294,25 @@
        ==================================================== -->
   <main>
 
-    <!-- —— Grupo 1: Cartas —— -->
     <span class="btn-group-label">Nuestra carta</span>
 
-    <!--
-      BOTÓN 1 — Carta principal
-      INSTRUCCIÓN: sustituye "ruta/carta.pdf" por la ruta real de tu PDF.
-      Ejemplo: si el PDF está en la misma carpeta → href="carta.pdf"
-    -->
-    <a
-      class="btn btn-primary"
-      href="carta.pdf"
-      target="_blank"
-      rel="noopener"
-      aria-label="Ver la carta en PDF"
-    >
+    <a class="btn btn-primary" href="carta.pdf" target="_blank" rel="noopener" aria-label="Ver la carta en PDF">
       Carta
     </a>
 
-    <!--
-      BOTÓN 2 — Carta Evento del Pescaito
-      INSTRUCCIÓN: sustituye "ruta/pescaito.pdf" por la ruta real de tu PDF.
-    -->
-    <a
-      class="btn btn-secondary"
-      href="pescaito.pdf"
-      target="_blank"
-      rel="noopener"
-      aria-label="Ver la carta del Evento del Pescaito en PDF"
-    >
-    Evento del Pescaito
+    <a class="btn btn-secondary" href="pescaito.pdf" target="_blank" rel="noopener" aria-label="Ver la carta del Evento del Pescaito en PDF">
+      Evento del Pescaito
     </a>
 
     <div class="divider"></div>
 
-    <!-- —— Grupo 2: Contacto —— -->
     <span class="btn-group-label">Contacto</span>
 
-    <!--
-      BOTÓN 3 — Haz tu evento
-      INSTRUCCIÓN: sustituye "+34000000000" por el número de teléfono real
-      en formato internacional sin espacios. Ejemplo: +34612345678
-    -->
-    <a
-      class="btn btn-outline"
-      href="tel:+34854733056"
-      aria-label="Llamar para organizar un evento"
-    >
+    <a class="btn btn-outline" href="tel:+34854733056" aria-label="Llamar para organizar un evento">
       Haz tu evento con nosotros
     </a>
 
-    <!--
-      BOTÓN 4 — Reserva tu mesa
-      INSTRUCCIÓN: sustituye "+34000000000" por el mismo número real.
-    -->
-    <a
-      class="btn btn-reserva"
-      href="tel:+34854733056"
-      aria-label="Llamar para reservar mesa"
-    >
+    <a class="btn btn-reserva" href="tel:+34854733056" aria-label="Llamar para reservar mesa">
       Reserva tu mesa
     </a>
 
@@ -367,7 +328,7 @@
       INSTRUCCIÓN: si quieres añadir un enlace a Google Maps, sustituye
       el # por la URL de tu ubicación en Google Maps.
     -->
-    <p><a href="https://share.google/Ce8UsVN2iw8rMi1R9" rel="noopener" target="_blank">Ver en Google Maps</a></p>
+    <p><a href="https://www.google.com/maps/place/Bar+El+Buche/@37.3766285,-6.0014194,17z/data=!3m1!4b1!4m6!3m5!1s0xd126d29309d483b:0xaecb8daf7d6e88ed!8m2!3d37.3766285!4d-6.0014194!16s%2Fg%2F11shp27ntg?entry=ttu&g_ep=EgoyMDI2MDMwOC4wIKXMDSoASAFQAw%3D%3D" rel="noopener" target="_blank">Ver en Google Maps</a></p>
   </footer>
 
 </body>
